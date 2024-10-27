@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui_widgets/tabs/expanded_segmented_control.dart';
-import 'package:macos_ui_widgets/tabs/expanded_tab.dart';
+import 'package:macos_ui_widgets/src/tabs/expanded_segmented_control.dart';
+import 'package:macos_ui_widgets/src/tabs/expanded_tab.dart';
 
 const _kTabViewRadius = BorderRadius.all(
   Radius.circular(6.0),

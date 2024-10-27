@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui_widgets/tabs/expanded_tab.dart';
-import 'package:macos_ui_widgets/tabs/expanded_tab_view.dart';
+import 'package:macos_ui_widgets/src/tabs/expanded_tab.dart';
+import 'package:macos_ui_widgets/src/tabs/expanded_tab_view.dart';
 
 /// {@template macosSegmentedControl}
 /// Displays one or more navigational tabs in a single horizontal group.
