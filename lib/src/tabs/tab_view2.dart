@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui_widgets/src/tabs/expanded_segmented_control.dart';
-import 'package:macos_ui_widgets/src/tabs/expanded_tab.dart';
+import 'package:macos_ui_widgets/src/tabs/segmented_control2.dart';
+import 'package:macos_ui_widgets/src/tabs/tab2.dart';
 
 const _kTabViewRadius = BorderRadius.all(
   Radius.circular(6.0),
@@ -19,9 +19,9 @@ const _kTabViewRadius = BorderRadius.all(
 /// The tab controller's [MacosTabController.length] must equal the length of
 /// the [children] list and the length of the [tabs] list.
 /// {@endtemplate}
-class MacosExpandedTabView extends StatefulWidget {
+class MacosTabView2 extends StatefulWidget {
   /// {@macro macosTabView}
-  const MacosExpandedTabView({
+  const MacosTabView2({
     super.key,
     required this.controller,
     required this.tabs,
@@ -37,7 +37,7 @@ class MacosExpandedTabView extends StatefulWidget {
   final MacosTabController controller;
 
   /// A list of navigational items, typically a length of two or more.
-  final List<MacosExpandedTab> tabs;
+  final List<MacosTab2> tabs;
 
   /// The views to navigate between.
   ///
@@ -58,10 +58,10 @@ class MacosExpandedTabView extends StatefulWidget {
   final BoxDecoration? innerDecoration;
 
   @override
-  State<MacosExpandedTabView> createState() => _MacosExpandedTabViewState();
+  State<MacosTabView2> createState() => _MacosTabView2State();
 }
 
-class _MacosExpandedTabViewState extends State<MacosExpandedTabView> {
+class _MacosTabView2State extends State<MacosTabView2> {
   late List<Widget> _childrenWithKey;
   int? _currentIndex;
 
@@ -79,7 +79,7 @@ class _MacosExpandedTabViewState extends State<MacosExpandedTabView> {
   }
 
   @override
-  void didUpdateWidget(MacosExpandedTabView oldWidget) {
+  void didUpdateWidget(MacosTabView2 oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       _updateTabController();
@@ -154,7 +154,7 @@ class _MacosExpandedTabViewState extends State<MacosExpandedTabView> {
               LayoutBuilder(builder: (context, constrains) {
                 return ConstrainedBox(
                   constraints: BoxConstraints.tightForFinite(width: constrains.maxWidth),
-                  child: MacosExpandedSegmentedControl(
+                  child: MacosSegmentedControl2(
                     controller: widget.controller,
                     tabs: widget.tabs,
                   ),

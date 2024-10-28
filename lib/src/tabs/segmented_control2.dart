@@ -1,45 +1,45 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart';
-import 'package:macos_ui_widgets/src/tabs/expanded_tab.dart';
-import 'package:macos_ui_widgets/src/tabs/expanded_tab_view.dart';
+import 'package:macos_ui_widgets/src/tabs/tab2.dart';
+import 'package:macos_ui_widgets/src/tabs/tab_view2.dart';
 
 /// {@template macosSegmentedControl}
 /// Displays one or more navigational tabs in a single horizontal group.
 ///
-/// Used by [MacosExpandedTabView] to navigate between the different tabs of the tab bar.
+/// Used by [MacosTabView2] to navigate between the different tabs of the tab bar.
 ///
-/// [MacosExpandedSegmentedControl] can be considered somewhat analogous to Flutter's
+/// [MacosSegmentedControl2] can be considered somewhat analogous to Flutter's
 /// material `TabBar` in that it requires a list of [tabs]. Unlike `TabBar`,
-/// however, [MacosExpandedSegmentedControl] explicitly requires a [controller].
+/// however, [MacosSegmentedControl2] explicitly requires a [controller].
 ///
 /// See also:
-/// * [MacosExpandedTab], which is a navigational item in a [MacosExpandedSegmentedControl].
-/// * [MacosExpandedTabView], which is a multi-page navigational view.
+/// * [MacosTab2], which is a navigational item in a [MacosSegmentedControl2].
+/// * [MacosTabView2], which is a multi-page navigational view.
 /// {@endtemplate}
-class MacosExpandedSegmentedControl extends StatefulWidget {
+class MacosSegmentedControl2 extends StatefulWidget {
   /// {@macro macosSegmentedControl}
   ///
   /// [tabs] and [controller] must not be null. [tabs] must contain at least one
   /// tab.
-  const MacosExpandedSegmentedControl({
+  const MacosSegmentedControl2({
     super.key,
     required this.tabs,
     required this.controller,
   }) : assert(tabs.length > 0);
 
-  /// The navigational items of this [MacosExpandedSegmentedControl].
-  final List<MacosExpandedTab> tabs;
+  /// The navigational items of this [MacosSegmentedControl2].
+  final List<MacosTab2> tabs;
 
   /// The [MacosTabController] that manages the [tabs] in this
-  /// [MacosExpandedSegmentedControl].
+  /// [MacosSegmentedControl2].
   final MacosTabController controller;
 
   @override
-  State<MacosExpandedSegmentedControl> createState() => _MacosExpandedSegmentedControlState();
+  State<MacosSegmentedControl2> createState() => _MacosSegmentedControl2State();
 }
 
-class _MacosExpandedSegmentedControlState extends State<MacosExpandedSegmentedControl> {
+class _MacosSegmentedControl2State extends State<MacosSegmentedControl2> {
   @override
   Widget build(BuildContext context) {
     final brightness = MacosTheme.brightnessOf(context);

@@ -11,9 +11,9 @@ const _kTabBorderRadius = BorderRadius.all(
 /// A macOS-style navigational button used to move between the views of a
 /// [MacosExpandedTabView].
 /// {@endtemplate}
-class MacosExpandedTab extends StatelessWidget {
+class MacosTab2 extends StatelessWidget {
   /// {@macro macosTab}
-  const MacosExpandedTab({
+  const MacosTab2({
     super.key,
     required this.label,
     this.active = false,
@@ -26,7 +26,7 @@ class MacosExpandedTab extends StatelessWidget {
   // The style of the label.
   final TextStyle? labelStyle;
 
-  /// Whether this [MacosExpandedTab] is currently selected. Handled internally by
+  /// Whether this [MacosTab2] is currently selected. Handled internally by
   /// [MacosExpandedSegmentedControl]'s build function.
   final bool active;
 
@@ -92,14 +92,14 @@ class MacosExpandedTab extends StatelessWidget {
     );
   }
 
-  /// Copies this [MacosExpandedTab] into another.
-  MacosExpandedTab copyWith({
+  /// Copies this [MacosTab2] into another.
+  MacosTab2 copyWith({
     String? label,
     bool? active,
     TextStyle? labelStyle,
     bool? last,
   }) {
-    return MacosExpandedTab(
+    return MacosTab2(
       label: label ?? this.label,
       active: active ?? this.active,
       labelStyle: labelStyle ?? this.labelStyle,
