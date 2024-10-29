@@ -30,8 +30,11 @@ class MacosTabView2 extends StatefulWidget {
     this.outerDecoration,
     this.innerDecoration,
     this.innerPadding = const EdgeInsets.only(top: 36.0),
-    this.outerPadding = const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0, bottom: 12.0),
-  }) : assert(controller.length == children.length && controller.length == tabs.length);
+    this.outerPadding =
+        const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0, bottom: 12.0),
+    this.onTabChanged,
+  }) : assert(controller.length == children.length &&
+            controller.length == tabs.length);
 
   /// This widget's selection state.
   final MacosTabController controller;
@@ -49,13 +52,20 @@ class MacosTabView2 extends StatefulWidget {
   /// Defaults to `EdgeInsets.all(12.0)`.
   final EdgeInsetsGeometry outerPadding;
 
+  /// The padding of the inner content.
   final EdgeInsetsGeometry innerPadding;
 
+  /// The constraints of the tab view widget.
   final BoxConstraints? constraints;
 
+  /// The decoration of the outer container.
   final BoxDecoration? outerDecoration;
 
+  /// The decoration of the inner container.
   final BoxDecoration? innerDecoration;
+
+  /// A callback that is called when the selected tab changes.
+  final ValueChanged<int>? onTabChanged;
 
   @override
   State<MacosTabView2> createState() => _MacosTabView2State();
@@ -153,8 +163,10 @@ class _MacosTabView2State extends State<MacosTabView2> {
             children: [
               LayoutBuilder(builder: (context, constrains) {
                 return ConstrainedBox(
-                  constraints: BoxConstraints.tightForFinite(width: constrains.maxWidth),
+                  constraints:
+                      BoxConstraints.tightForFinite(width: constrains.maxWidth),
                   child: MacosSegmentedControl2(
+                    onTabChanged: widget.onTabChanged,
                     controller: widget.controller,
                     tabs: widget.tabs,
                   ),

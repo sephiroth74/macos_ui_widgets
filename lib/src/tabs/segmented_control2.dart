@@ -26,10 +26,14 @@ class MacosSegmentedControl2 extends StatefulWidget {
     super.key,
     required this.tabs,
     required this.controller,
+    this.onTabChanged,
   }) : assert(tabs.length > 0);
 
   /// The navigational items of this [MacosSegmentedControl2].
   final List<MacosTab2> tabs;
+
+  /// A callback that is called when the selected tab changes.
+  final ValueChanged<int>? onTabChanged;
 
   /// The [MacosTabController] that manages the [tabs] in this
   /// [MacosSegmentedControl2].
@@ -71,9 +75,11 @@ class _MacosSegmentedControl2State extends State<MacosSegmentedControl2> {
               mainAxisSize: MainAxisSize.max,
               children: widget.tabs.mapIndexed((index, t) {
                 final last = index == widget.tabs.length - 1;
-                bool showDividerColor = true;
-                if ((widget.controller.index - 1 == index) || (widget.controller.index + 1 == index + 1) || last) {
-                  showDividerColor = false;
+                bool showDivider = true;
+                if (last ||
+                    widget.controller.index == index ||
+                    widget.controller.index == index + 1) {
+                  showDivider = false;
                 }
 
                 return Row(
@@ -83,25 +89,29 @@ class _MacosSegmentedControl2State extends State<MacosSegmentedControl2> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          widget.controller.index = widget.tabs.indexOf(t);
+                          final newIndex = widget.tabs.indexOf(t);
+                          widget.controller.index = newIndex;
+                          widget.onTabChanged?.call(newIndex);
                         });
                       },
                       // child: Text(t.label),
                       child: SizedBox(
                         width: tabSize - (last ? 0 : 2),
                         child: t.copyWith(
-                          active: widget.controller.index == widget.tabs.indexOf(t),
+                          active:
+                              widget.controller.index == widget.tabs.indexOf(t),
                         ),
                       ),
                     ),
                     VerticalDivider(
-                      color: !last && showDividerColor
+                      color: showDivider
                           ? brightness.resolve(
                               const Color(0xFFC9C9C9),
                               const Color(0xFF26222C),
                             )
                           : Colors.transparent,
                       width: last ? 0 : 2.0,
+                      thickness: 1.0,
                       indent: 5.0,
                       endIndent: 5.0,
                     ),

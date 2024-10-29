@@ -12,7 +12,7 @@ class TabView2Page extends StatefulWidget {
 class _TabViewPageState extends State<TabView2Page> {
   final _controller = MacosTabController(
     initialIndex: 0,
-    length: 3,
+    length: 4,
   );
 
   @override
@@ -48,28 +48,19 @@ class _TabViewPageState extends State<TabView2Page> {
             return Padding(
               padding: const EdgeInsets.all(24.0),
               child: MacosTabView2(
+                onTabChanged: (value) => debugPrint('Tab changed to $value'),
                 controller: _controller,
                 tabs: const [
-                  MacosTab2(
-                    label: 'Tab 1',
-                  ),
-                  MacosTab2(
-                    label: 'Tab 2',
-                  ),
-                  MacosTab2(
-                    label: 'Tab 3',
-                  ),
+                  MacosTab2(label: 'Tab 1'),
+                  MacosTab2(label: 'Tab 2'),
+                  MacosTab2(label: 'Tab 3'),
+                  MacosTab2(label: 'Tab 4'),
                 ],
                 children: const [
-                  Center(
-                    child: Text('Tab 1'),
-                  ),
-                  Center(
-                    child: Text('Tab 2'),
-                  ),
-                  Center(
-                    child: Text('Tab 3'),
-                  ),
+                  Center(child: Text('Tab 1')),
+                  Center(child: Text('Tab 2')),
+                  Center(child: Text('Tab 3')),
+                  Center(child: Text('Tab 4')),
                 ],
               ),
             );
