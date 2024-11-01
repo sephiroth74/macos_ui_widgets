@@ -8,7 +8,8 @@ Collection of extra widgets for macos, based on the <a href='https://pub.dev/pac
 
 List of available widgets:
 
- * MacosTabView2
+ * **MacosTabView2**
+ * **MacosPopupButton2**
 
 ## Installation
 

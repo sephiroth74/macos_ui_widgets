@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:example/pages/popup_page.dart';
 import 'package:example/pages/tab2_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -67,14 +68,14 @@ class _WidgetGalleryState extends State<WidgetGallery> {
             return SidebarItems(
               currentIndex: pageIndex,
               onChanged: (i) {
+                debugPrint('selected index: $i');
                 setState(() => pageIndex = i);
               },
               scrollController: scrollController,
               itemSize: SidebarItemSize.large,
               items: const [
-                SidebarItem(
-                  label: Text('Tab2'),
-                ),
+                SidebarItem(label: Text('Tab2')),
+                SidebarItem(label: Text('Buttons2')),
               ],
             );
           },
@@ -97,6 +98,7 @@ class _WidgetGalleryState extends State<WidgetGallery> {
         ),
         child: [
           CupertinoTabView(builder: (_) => const TabView2Page()),
+          const PopupButton2Page(),
         ][pageIndex],
       ),
     );

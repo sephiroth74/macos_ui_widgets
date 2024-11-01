@@ -1,6 +1,6 @@
 name: macos_ui_widgets
 description: "Extra widgets for macos ui, based on the <a href='https://pub.dev/packages/macos_ui'>macos_ui</a> library."
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/sephiroth74/macos_ui_widgets
 
 environment:
