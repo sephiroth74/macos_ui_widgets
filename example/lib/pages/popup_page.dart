@@ -196,6 +196,132 @@ class _PopupButton2PageState extends State<PopupButton2Page> {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 8.0),
+                    Container(
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: containerDecoration,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Flexible(flex: 0, child: Text('Pull Down')),
+                          const Spacer(),
+                          Builder(
+                            builder: (context) {
+                              return Row(
+                                children: [
+                                  MacosPulldownButton2(
+                                    onTap: () {
+                                      debugPrint('Tapped');
+                                    },
+                                    onSelect: (value) {
+                                      debugPrint('selected value: $value');
+                                    },
+                                    menuAlignment: PulldownMenuAlignment.right,
+                                    controlSize: ControlSize.regular,
+                                    title: 'Add Photo',
+                                    autofocus: false,
+                                    items: const [
+                                      MacosPulldownMenuItem2(
+                                          title: Text('From Photos...'),
+                                          label: 'From Photos',
+                                          value: 0),
+                                      MacosPulldownMenuDivider(),
+                                      MacosPulldownMenuItem2(
+                                          value: 1,
+                                          title: Row(
+                                            children: [
+                                              Icon(
+                                                CupertinoIcons.folder,
+                                                size: 14.0,
+                                                color: MacosColors
+                                                    .controlTextColor,
+                                              ),
+                                              SizedBox(width: 8.0),
+                                              Text('From Files...'),
+                                            ],
+                                          ),
+                                          label: 'From Files'),
+                                      MacosPulldownMenuItem2(
+                                        value: 2,
+                                        title: Row(
+                                          children: [
+                                            Icon(
+                                              CupertinoIcons.photo,
+                                              size: 14.0,
+                                              color:
+                                                  MacosColors.controlTextColor,
+                                            ),
+                                            SizedBox(width: 8.0),
+                                            Text('From Media...'),
+                                          ],
+                                        ),
+                                        label: 'From Media',
+                                        enabled: false,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8.0),
+                    Container(
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: containerDecoration,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Flexible(
+                              flex: 0, child: Text('Pull Down with icon')),
+                          const Spacer(),
+                          Builder(
+                            builder: (context) {
+                              return MacosPulldownButton2(
+                                controlSize: ControlSize.large,
+                                icon: CupertinoIcons.wifi_exclamationmark,
+                                autofocus: false,
+                                onTap: () {
+                                  debugPrint('Tapped');
+                                },
+                                onSelect: (value) =>
+                                    debugPrint('selected value: $value'),
+                                items: const [
+                                  MacosPulldownMenuItem2(
+                                    title: Text('From Photos'),
+                                    label: 'From Photos',
+                                    value: 'from-photos',
+                                  ),
+                                  MacosPulldownMenuDivider(),
+                                  MacosPulldownMenuItem2(
+                                      value: 'from-files',
+                                      title: Row(
+                                        children: [
+                                          Icon(
+                                            CupertinoIcons.folder,
+                                            size: 14.0,
+                                            color: MacosColors.controlTextColor,
+                                          ),
+                                          SizedBox(width: 8.0),
+                                          Text('From Files'),
+                                        ],
+                                      ),
+                                      label: 'From Files'),
+                                  MacosPulldownMenuItem2(
+                                    value: 'from-other-media',
+                                    title: Text('From Other Media'),
+                                    label: 'From Other Media',
+                                    enabled: false,
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

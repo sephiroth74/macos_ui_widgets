@@ -68,7 +68,6 @@ class _WidgetGalleryState extends State<WidgetGallery> {
             return SidebarItems(
               currentIndex: pageIndex,
               onChanged: (i) {
-                debugPrint('selected index: $i');
                 setState(() => pageIndex = i);
               },
               scrollController: scrollController,

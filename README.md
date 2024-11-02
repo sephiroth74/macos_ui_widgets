@@ -10,6 +10,7 @@ List of available widgets:
 
  * **MacosTabView2**
  * **MacosPopupButton2**
+ * **MacosPulldownButton2**
 
 ## Installation
 

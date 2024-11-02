@@ -1,4 +1,8 @@
 
+## 0.0.5
+
+ * Added `MacosPulldownButton2` widget
+
 ## 0.0.4
 
  * Added `MacosPopupButton2` widget
