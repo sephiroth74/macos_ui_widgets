@@ -209,7 +209,7 @@ class _PopupButton2PageState extends State<PopupButton2Page> {
                             builder: (context) {
                               return Row(
                                 children: [
-                                  MacosPulldownButton2(
+                                  MacosPulldownButton2<int>(
                                     onTap: () {
                                       debugPrint('Tapped');
                                     },
@@ -225,7 +225,7 @@ class _PopupButton2PageState extends State<PopupButton2Page> {
                                           title: Text('From Photos...'),
                                           label: 'From Photos',
                                           value: 0),
-                                      MacosPulldownMenuDivider(),
+                                      MacosPulldownMenuDivider2(),
                                       MacosPulldownMenuItem2(
                                           value: 1,
                                           title: Row(
@@ -279,22 +279,23 @@ class _PopupButton2PageState extends State<PopupButton2Page> {
                           const Spacer(),
                           Builder(
                             builder: (context) {
-                              return MacosPulldownButton2(
+                              return MacosPulldownButton2<String>(
                                 controlSize: ControlSize.large,
                                 icon: CupertinoIcons.wifi_exclamationmark,
                                 autofocus: false,
                                 onTap: () {
                                   debugPrint('Tapped');
                                 },
-                                onSelect: (value) =>
-                                    debugPrint('selected value: $value'),
+                                onSelect: (value) {
+                                  debugPrint('selected value: $value');
+                                },
                                 items: const [
                                   MacosPulldownMenuItem2(
                                     title: Text('From Photos'),
                                     label: 'From Photos',
                                     value: 'from-photos',
                                   ),
-                                  MacosPulldownMenuDivider(),
+                                  MacosPulldownMenuDivider2(),
                                   MacosPulldownMenuItem2(
                                       value: 'from-files',
                                       title: Row(

@@ -8,6 +8,7 @@ import 'package:macos_ui/macos_ui.dart';
 
 const Duration _kMenuDuration = Duration(milliseconds: 300);
 const double _kMenuItemHeight = 26.0;
+const double _kMenuDividerHeight = 10.0;
 const EdgeInsets _kMenuItemPadding = EdgeInsets.symmetric(horizontal: 9.0);
 const BorderRadius _kBorderRadius = BorderRadius.all(Radius.circular(5.0));
 const double _kMenuLeftOffset = 8.0;
@@ -50,7 +51,7 @@ class _MacosPulldownMenuItemButtonState
   }
 
   void _handleOnTap() {
-    final MacosPulldownMenuEntry menuEntity =
+    final MacosPulldownMenuEntry2 menuEntity =
         widget.route.items[widget.itemIndex].item!;
     if (menuEntity is MacosPulldownMenuItem2) {
       Navigator.pop(context, menuEntity.value);
@@ -61,7 +62,7 @@ class _MacosPulldownMenuItemButtonState
   Widget build(BuildContext context) {
     final MacosThemeData theme = MacosTheme.of(context);
     final brightness = MacosTheme.brightnessOf(context);
-    final MacosPulldownMenuEntry menuEntity =
+    final MacosPulldownMenuEntry2 menuEntity =
         widget.route.items[widget.itemIndex].item!;
     if (menuEntity is MacosPulldownMenuItem2) {
       Widget child = Container(
@@ -468,7 +469,7 @@ class _MenuItem extends SingleChildRenderObjectWidget {
 
   final ValueChanged<Size> onLayout;
 
-  final MacosPulldownMenuEntry? item;
+  final MacosPulldownMenuEntry2? item;
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -496,10 +497,46 @@ class _RenderMenuItem extends RenderProxyBox {
   }
 }
 
+/// An entry in a menu created by a [MacosPulldownButton]. It can be either a
+/// [MacosPulldownMenuItem] or a [MacosPulldownMenuDivider].
+abstract class MacosPulldownMenuEntry2 extends Widget {
+  const MacosPulldownMenuEntry2({super.key});
+
+  double get itemHeight;
+}
+
+/// A divider (horizontal line) in a menu created by a [MacosPulldownButton].
+class MacosPulldownMenuDivider2 extends StatelessWidget
+    implements MacosPulldownMenuEntry2 {
+  /// Creates a divider for a macOS-style pulldown menu.
+  const MacosPulldownMenuDivider2({super.key});
+
+  @override
+  double get itemHeight => _kMenuDividerHeight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: _kMenuDividerHeight,
+      padding: _kMenuItemPadding,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          color: MacosTheme.of(context).brightness.resolve(
+                MacosColors.disabledControlTextColor,
+                MacosColors.disabledControlTextColor.darkColor,
+              ),
+          height: 0.5,
+        ),
+      ),
+    );
+  }
+}
+
 /// An item in a menu created by a [MacosPulldownButton2], typically a [Text]
 /// widget.
 class MacosPulldownMenuItem2<T> extends StatelessWidget
-    implements MacosPulldownMenuEntry {
+    implements MacosPulldownMenuEntry2 {
   /// Creates an item for a macOS-style pulldown menu.
   const MacosPulldownMenuItem2({
     super.key,
@@ -600,7 +637,7 @@ class MacosPulldownButton2<T> extends StatefulWidget {
   ///
   /// If the list of items is null, then the pull-down button will be disabled,
   /// i.e. it will be displayed in grey and not respond to input.
-  final List<MacosPulldownMenuEntry>? items;
+  final List<MacosPulldownMenuEntry2>? items;
 
   /// The text to display as title for the pull-down button.
   ///
@@ -665,10 +702,10 @@ class MacosPulldownButton2<T> extends StatefulWidget {
   }
 
   @override
-  State<MacosPulldownButton2> createState() => _MacosPulldownButton2State();
+  State<MacosPulldownButton2> createState() => _MacosPulldownButton2State<T>();
 }
 
-class _MacosPulldownButton2State extends State<MacosPulldownButton2>
+class _MacosPulldownButton2State<T> extends State<MacosPulldownButton2<T>>
     with WidgetsBindingObserver {
   _MacosPulldownRoute? _pulldownRoute;
   FocusNode? _internalNode;
@@ -699,7 +736,7 @@ class _MacosPulldownButton2State extends State<MacosPulldownButton2>
   }
 
   @override
-  void didUpdateWidget(MacosPulldownButton2 oldWidget) {
+  void didUpdateWidget(MacosPulldownButton2<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.focusNode != oldWidget.focusNode) {
       oldWidget.focusNode?.removeListener(_handleFocusChanged);
@@ -788,7 +825,10 @@ class _MacosPulldownButton2State extends State<MacosPulldownButton2>
       setState(() => _pullDownButtonState = PulldownButtonState.enabled);
       _removeMacosPulldownRoute();
       if (!mounted) return;
-      widget.onSelect?.call(value);
+
+      if (widget.onSelect != null) {
+        (widget.onSelect as ValueChanged<T>).call(value);
+      }
     });
 
     widget.onTap?.call();
